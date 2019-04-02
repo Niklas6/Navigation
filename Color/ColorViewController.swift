@@ -10,9 +10,21 @@ import UIKit
 
 class ColorViewController: UIViewController, UITabBarDelegate, UITableViewDataSource {
     
+    var colors2 = [Color(name:"red", uiColor: UIColor.red),
+                   Color(name:"orange", uiColor: UIColor.orange),
+                   Color(name:"yellow", uiColor: UIColor.yellow),
+                   Color(name:"green", uiColor: UIColor.green),
+                   Color(name:"blue", uiColor: UIColor.blue),
+                   Color(name:"purple", uiColor: UIColor.purple),
+                   Color(name:"brown", uiColor: UIColor.brown)]
+    
     var colors = ["red", "orange", "yellow", "green", "blue", "purple", "brown"]
     var Col = [UIColor.red, UIColor.orange, UIColor.yellow, UIColor.green, UIColor.blue, UIColor.purple, UIColor.brown]
 
+    
+    @IBOutlet weak var colorsTableView: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,19 +44,21 @@ class ColorViewController: UIViewController, UITabBarDelegate, UITableViewDataSo
         
         cell.textLabel?.text = colors[indexPath.row]
         cell.backgroundColor =  Col[indexPath.row]
+        cell.selectionStyle = .none
         
         return cell
+        
     }
     
+    //func tableView(_ tableView: UITableView, didSlectRowAt indexPath: IndexPath) {
+    //    tableView.cellForRow(at: indexPath)?.isSelected = false
+    //}
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if  let destination = segue.destination as? ColorDetailViewController,
+            let row = colorsTableView.indexPathForSelectedRow?.row {
+            destination.color = colors2[row]
+            }
     }
-    */
 
 }
